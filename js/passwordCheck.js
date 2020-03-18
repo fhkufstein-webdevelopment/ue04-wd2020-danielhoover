@@ -29,6 +29,15 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         that.check();
     };
 
+    this.passwordField.onfocus = function() {
+        that.check();
+    };
+
+    this.passwordField.onkeyup = function() {
+        that.check();
+    };
+
+
     //TODO implement the other events in the exact same way!
 
 
@@ -69,19 +78,28 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     This method should return true if the length of passwordField value is greater or equal to this.minLength
      */
     this.checkForLength = function() {
+        if(this.passwordField.value.length >= this.minLength) {
+            return true;
+        } else {
+            return false;
+        }
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        //return false; //this needs to be replaced!
     };
 
     /*
-    This method returns true if no special Character "!§$_.:,;" is found in this.password - otherwise false
+    This method returns false if no special Character "!§$_.:,;" is found in this.passwordField - otherwise false
      */
     this.checkForSpecialCharacters = function() {
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        regex = /[(!§$_.:,;)]/g;
+
+        return this.passwordField.value.match(regex);
+
+        //return true; //this needs to be replaced!
     };
 }
 
